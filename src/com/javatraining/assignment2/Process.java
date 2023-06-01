@@ -27,7 +27,7 @@ public class Process {
 	}
 	
 	public void addPatron() {
-	if(lb.bookcount()) {
+	if(lb.patronscount()) {
 		System.out.println("Enter patron name :");
 		patron=sc.next();
 		lb.addPatrons(patron);
