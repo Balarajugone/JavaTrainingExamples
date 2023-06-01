@@ -52,7 +52,7 @@ public class Transaction {
 		                    ac.withdraw(withdrawalAmount,acc_no);
 		                    break;
 		                case 4:
-		                    ac.TransactionHistory();
+		                    ac.TransactionHistory(acc_no);
 		                    break;
 		                case 5:
 		                    System.out.println("Thank you!");

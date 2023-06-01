@@ -18,7 +18,6 @@ public class Accounts_arr {
 	public Accounts_arr() {
 		balance = null;
 		transactions = new double[100];
-		transactionCount = 0;
 		ac_count = 0;
 		pin_count = 0;
 		bal_count = 0;
@@ -35,6 +34,7 @@ public class Accounts_arr {
 				do {
 					if(pn==pin[i]) {
 						System.out.println("login sucessfull");
+						transactionCount = 0;
 						return true;
 					}else {
 						attempts--;
@@ -101,7 +101,7 @@ public class Accounts_arr {
 		}
 	}
 
-	public void TransactionHistory() {
+	public void TransactionHistory(int acc_no) {
 		System.out.println("Transaction History:");
 		if(transactionCount==0) {
 			System.out.println("No Transaction has done");
@@ -113,6 +113,7 @@ public class Accounts_arr {
 				System.out.println("Withdraw: $" + (-transactions[i]));
 			}
 		}
+		System.out.println("Current Balance : "+checkBalance(acc_no));
 	}
 
 }
