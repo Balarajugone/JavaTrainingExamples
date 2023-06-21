@@ -17,9 +17,10 @@ public class RGTMessaging {
 		System.out.println("\nEnter Password: ");
 		String password=sc.next();
 		System.out.println("\nEnter Name: ");
-		String name=sc.next();
+		String name=sc.nextLine();
+		name+=sc.nextLine();
 		System.out.println("\nEnter bio: ");
-		String bio=sc.next();
+		String bio=sc.nextLine();
 		if (datastore.isUserExists(userName)) {
 			System.out.println("Username already exists. Please choose a different username.");
 		} else {
@@ -122,7 +123,7 @@ public class RGTMessaging {
 					}
 					break;
 					case 3: 
-						if(tweet.getRetweets().isEmpty()) {
+						if(tweet.getReplies().isEmpty()) {
 							System.out.println("No Retweets");
 						}else {
 							for(Map.Entry<String, User> replies:tweet.replies.entrySet()) {
@@ -152,12 +153,14 @@ public class RGTMessaging {
 	}
 	public void retweet(Tweet tweet) {
 		System.out.println("Add your Retweet: ");
-		String retweet=sc.next();
+		String retweet=sc.nextLine();
+		retweet+=sc.nextLine();
 		tweet.retweet(retweet,datastore.getUser(currentuser));
 	}
 	public void reply(Tweet tweet) {
 		System.out.println("Add your Reply: ");
-		String reply=sc.next();
+		String reply=sc.nextLine();
+		reply+=sc.nextLine();
 		tweet.reply(reply,datastore.getUser(currentuser));
 	}
 
@@ -207,7 +210,8 @@ public class RGTMessaging {
 
 	private void postTweet() {
 		System.out.println("Write a tweet :");
-		String content = sc.next();
+		String content = sc.nextLine();
+		content+= sc.nextLine();
 		User User=datastore.getUser(currentuser);
 		Tweet tweet = new Tweet(datastore.generateTweetID(), content, User);
 		User.postTweet(tweet);
