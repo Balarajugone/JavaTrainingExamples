@@ -14,7 +14,7 @@ public class Rental
 
 {
 
-    private VehicleDetails rentedVehicle = null;
+    private VehicleDetails rentedVehicle ;
 
     private CustomerDetails customer;
 
