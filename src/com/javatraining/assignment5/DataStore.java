@@ -48,6 +48,7 @@ public class DataStore {
 					result.add(tweet);
 				}else {
 					System.out.println("Tweet doesn't Exist...");
+					break;
 				}
 			}
 		}

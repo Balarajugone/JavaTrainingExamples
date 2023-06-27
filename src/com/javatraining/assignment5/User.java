@@ -59,8 +59,8 @@ public class User {
 	}
 
 	public void unfollow(User user) {
-		followers.remove(user);
-		user.followings.remove(this);
+		followings.remove(user);
+		user.followers.remove(this);
 	}
 
 	public void postTweet(Tweet tweet) {

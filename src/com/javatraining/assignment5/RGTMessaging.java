@@ -95,7 +95,7 @@ public class RGTMessaging {
 					choice=sc.nextInt();
 					switch (choice) {
 					case 1:if(tweet.getLikes().isEmpty()) {
-						System.out.println("No Retweets");
+						System.out.println("No Likes");
 					}else {
 						for(User likes:tweet.getLikes()) {
 							System.out.println(likes.getuserName());
@@ -124,7 +124,7 @@ public class RGTMessaging {
 					break;
 					case 3: 
 						if(tweet.getReplies().isEmpty()) {
-							System.out.println("No Retweets");
+							System.out.println("No Replies");
 						}else {
 							for(Map.Entry<String, User> replies:tweet.replies.entrySet()) {
 								System.out.println(replies.getKey()+"    "+replies.getValue().getuserName());
@@ -187,18 +187,44 @@ public class RGTMessaging {
 			System.out.println("\nEnter your choice: ");
 			choice=sc.nextInt();
 			switch (choice) {
-			case 1: for(User user:User.getfollowers()) {
-				System.out.println(user.getuserName());
+
+			case 1: if(User.getfollowers().isEmpty()) {
+				System.out.println("No Followers");
+			}else {
+				for(User user:User.getfollowers()) {
+					System.out.println(user.getuserName());
+				}
 			}
 			break;
-			case 2: for(User user:User.getfollowings()) {
-				System.out.println(user.getuserName());
+
+			case 2:if(User.getfollowings().isEmpty()) {
+				System.out.println("No Followings");
+			}else {
+				for(User user:User.getfollowings()) {
+					System.out.println(user.getuserName());
+				}
+				System.out.println("To UnFollow click y");
+				String click=sc.next();
+				if(click.equalsIgnoreCase("y")) {
+					unFollow();
+				}
 			}
 			break;
-			case 3: for(Tweet tweet:User.getTweets()) {
-				System.out.println(tweet.getContent());
+
+			case 3:if(User.getTweets().isEmpty()) {
+				System.out.println("No Tweets");
+			}else {
+				for(Tweet tweet:User.getTweets()) {
+					System.out.println(tweet.getContent()+"  "+tweet.getTimestamp());
+				}
+				System.out.println("To Delete Tweet click y");
+				String click=sc.next();
+				if(click.equalsIgnoreCase("y")) {
+					deletetweet();
+				}
 			}
 			break;
+
 			case 4: System.out.println("Home");
 			break;
 			default:
@@ -216,6 +242,59 @@ public class RGTMessaging {
 		Tweet tweet = new Tweet(datastore.generateTweetID(), content, User);
 		User.postTweet(tweet);
 		System.out.println("Tweet posted successfully!!");
+	}
+
+	public void deletetweet() {
+
+		System.out.println("please enter delete tweet");
+
+		String deletetweet = sc.next();
+		User User=datastore.getUser(currentuser);
+
+		Iterator<Tweet> itr =User.getTweets().iterator();
+
+		while(itr.hasNext()) {
+
+			Tweet deltwet = itr.next();
+
+			if(deltwet.getContent().equals(deletetweet)) {
+
+				User.deleteTweet(deltwet);
+
+				System.out.println("Tweet Deleted Sucessfully...");
+
+				break;
+
+			}
+
+		}
+	}
+
+	public void unFollow() {
+
+		System.out.println("please enter the username");
+
+		String username = sc.next();
+		User User=datastore.getUser(currentuser);
+
+		Iterator<User> itr =User.getfollowings().iterator();
+
+		while(itr.hasNext()) {
+
+		  User unfoll = itr.next();
+
+			if(unfoll.getuserName().equals(username)) {
+
+				User.unfollow(unfoll);
+
+				System.out.println("UnFollow Sucessfully...");
+
+				break;
+
+			}
+
+		}
+
 	}
 
 	private  void userMenu(String name) {
