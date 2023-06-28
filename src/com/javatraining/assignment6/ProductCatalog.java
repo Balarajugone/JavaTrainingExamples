@@ -1,8 +1,6 @@
 package com.javatraining.assignment6;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 import java.io.*;
 
 public class ProductCatalog implements Serializable{
@@ -17,7 +15,8 @@ public class ProductCatalog implements Serializable{
 	public void loadProduct(){
 		System.out.println("Enter the file name");
 		String fileName=sc.next();
-		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName)))  {
+		File f=new File("C:\\Balaraju\\Java\\Training_Workspace\\JavaTrainingExamples\\src\\com\\javatraining\\assignment6\\"+fileName);
+		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f)))  {
 			products = (HashMap<String, Product>) ois.readObject();
 		} catch (IOException | ClassNotFoundException e) {
 
@@ -34,7 +33,8 @@ public class ProductCatalog implements Serializable{
 	}
 
 	public void saveProducts(String fileName){
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName)))
+		File f=new File("C:\\Balaraju\\Java\\Training_Workspace\\JavaTrainingExamples\\src\\com\\javatraining\\assignment6\\"+fileName);
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f)))
 		{
 			oos.writeObject(products);
 			System.out.println("Products Saved");

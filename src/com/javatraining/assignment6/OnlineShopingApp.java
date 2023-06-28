@@ -1,22 +1,18 @@
 package com.javatraining.assignment6;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 
 
-public class Main {
+public class OnlineShopingApp {
 	static Scanner sc=new Scanner(System.in);
 	static ProductCatalog productCatalog =new ProductCatalog();
 	static ShoppingCart shoppingCart =new ShoppingCart();
 	static OrderHistory orderHistory=new OrderHistory();
-	static File f;
 	static String filename;
 	static int choice;
 
 	public static void main(String[] args) throws Exception {
-		System.out.println("Welcome to RGTMessaging!");
 		do {
 			System.out.println("===== Online Shopping System =====");
 			System.out.println("1. Create the product");
@@ -31,9 +27,7 @@ public class Main {
 			switch (choice) {
 
 			case 1:
-				System.out.println("create a new product file \nEnter the file Name");
-				filename= sc.next();
-				createProducts(filename);
+				createProducts();
 				break;
 
 			case 2: 
@@ -74,7 +68,9 @@ public class Main {
 			}
 		}
 	}
-	private static void createProducts(String filename) {
+	private static void createProducts() {
+		System.out.println("Enter the file Name");
+		filename= sc.next();
 		System.out.println("Enter product size");
 		int size = sc.nextInt();
 		for(int i=0;i<size;i++) {

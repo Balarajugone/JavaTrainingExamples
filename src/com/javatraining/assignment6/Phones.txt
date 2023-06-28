@@ -1,4 +1,0 @@
-IPhone 14pro max:this is good phone,10000,5
-SamSung s29:this is average phone,5000,10
-OnePlus Nord:this is great phone,15000,3
-OnePlus 9T:this is super phone,20000,8

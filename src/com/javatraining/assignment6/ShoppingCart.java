@@ -1,14 +1,10 @@
 package com.javatraining.assignment6;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.stream.DoubleStream;
 
-import com.javatraining.assignment5.User;
 
 public class ShoppingCart {
 	Scanner sc=new Scanner(System.in);
