@@ -6,9 +6,9 @@ import java.util.HashMap;
 public class Order implements Serializable{
 	int confirmationNumber;
 	HashMap<Product,Integer> items;
-	long totalPrice;
+	double totalPrice;
 
-	public Order(int confirmationNumber, HashMap<Product, Integer> items, long totalPrice) {
+	public Order(int confirmationNumber, HashMap<Product, Integer> items, double totalPrice) {
 		this.confirmationNumber=confirmationNumber;
 		this.items=items;
 		this.totalPrice=totalPrice;
@@ -22,7 +22,7 @@ public class Order implements Serializable{
 		return items;
 	}
 
-	public long getTotalPrice() {
+	public double getTotalPrice() {
 		return totalPrice;
 	}
 }

@@ -21,37 +21,23 @@ public class ShoppingCart {
 	public void removeItem(Product product){
 		items.remove(product);
 	}
-	public long getTotalPrice(){
+	public double getTotalPrice(){
+		double totalPrice = 0;
 		for(Map.Entry<Product, Integer> item:items.entrySet()) {
-			long price=Integer.parseInt(item.getKey().getPrice())*item.getValue();
-			return price;
+			totalPrice+=Integer.parseInt(item.getKey().getPrice())*item.getValue();
 		}
-		return 0;
+		return totalPrice;
 	}
 	public void placeOrder() {
-		if(items.size()>1) {
-			System.out.println("Enter the item you want to Place an order.");
-			String product=sc.next();
-			product+=sc.nextLine();
 			 for (HashMap.Entry < Product, Integer > item: items.entrySet()){
-	    		 if(item.getKey().getName().equalsIgnoreCase(product)) {
 	    			 HashMap< Product, Integer > prd= new HashMap<>();
 	    			 prd.put(item.getKey(), item.getValue());
-	    			 order = new Order(conformationNum,prd,getTotalPrice());
+	    			 int price=Integer.parseInt(item.getKey().getPrice())*item.getValue();
+	    			 order = new Order(conformationNum,prd,price);
 	    				orderHistory.addOrder(order);
-	    				System.out.println("Order Placed Sucessfully...");
-	    				removeItem(item.getKey());
-	    				break;
-	    		 }
-			 }
-			 
-		}else {
-			order = new Order(conformationNum,items,getTotalPrice());
-			orderHistory.addOrder(order);
-			System.out.println("Order Placed Sucessfully...");
-			clear();
-		}
-		
+	    }
+			 System.out.println("Order Placed Sucessfully...");
+			 clear();
 	}
 	
 	public void displayItems(){
@@ -64,6 +50,7 @@ public class ShoppingCart {
         	int price=Integer.parseInt(item.getKey().getPrice())*item.getValue();
         System.out.println(item.getKey().getName() + " - Quantity: " + item.getValue()+"  - Price: "+price);
         }
+        System.out.println("Total Price:  "+getTotalPrice());
         System.out.println("Do you want to remove the Product (Y/N)");
 		 String remove = sc.next();
 	        if(remove.equalsIgnoreCase("y")) {
@@ -88,4 +75,30 @@ public class ShoppingCart {
 	public void clear() {
 		items.clear();
 	}
+/*	//Place order for the given product
+	public void placeOrder() {
+		if(items.size()>1) {
+			System.out.println("Enter the item you want to Place an order.");
+			String product=sc.next();
+			product+=sc.nextLine();
+			 for (HashMap.Entry < Product, Integer > item: items.entrySet()){
+	    		 if(item.getKey().getName().equalsIgnoreCase(product)) {
+	    			 HashMap< Product, Integer > prd= new HashMap<>();
+	    			 prd.put(item.getKey(), item.getValue());
+	    			 order = new Order(conformationNum,prd,getTotalPrice());
+	    				orderHistory.addOrder(order);
+	    				System.out.println("Order Placed Sucessfully...");
+	    				removeItem(item.getKey());
+	    				break;
+	    		 }
+			 }
+			 
+		}else {
+			order = new Order(conformationNum,items,getTotalPrice());
+			orderHistory.addOrder(order);
+			System.out.println("Order Placed Sucessfully...");
+			clear();
+		}
+		
+	}*/
 }

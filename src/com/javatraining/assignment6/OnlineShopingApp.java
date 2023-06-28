@@ -112,6 +112,7 @@ public class OnlineShopingApp {
 	
 	private static void viewOrderHistory(){
 		System.out.println("===== Order History =====");
+		double TotalPrice = 0;
 		orderHistory.loadOrderHistory();
 		Collection<Order> orders = orderHistory.getAllOrders();
 		if (orders.isEmpty()) {
@@ -119,10 +120,12 @@ public class OnlineShopingApp {
 		} else {
 			for (Order order : orders) {
 				for(Map.Entry<Product, Integer> item:order.getItems().entrySet()) {
+					TotalPrice+= order.getTotalPrice();
 					System.out.println("ConformationNumber: "+order.getConfirmationNumber()+"\nName: "+item.getKey().getName()+"\nDescription: "+item.getKey().getDescription()
-							+"\nPrice: "+order.getTotalPrice()+"\nQuantity: "+item.getValue());
+							+"\nQuantity: "+item.getValue()+"\nPrice: "+order.getTotalPrice()+"\n");
 				}
 			}
+			System.out.println("TotalPrice: "+TotalPrice);
 		}
 	}
 	
