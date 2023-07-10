@@ -11,11 +11,13 @@ public class IncrementalBiddingStrategy implements BiddingStrategy {
 		double currentBid = item.getCurrentHighestBid();
 		if (newBid > currentBid) {
 			item.placeBid(user, newBid);
+			return newBid;
 		} else {
-			System.out.println("Amount should not be less than the minimum bidding amount...");
+			System.out.println("Amount should not be less than the current bidding amount - "+currentBid);
 			notificationService.notifyUser(user, item);
 		}
-		return newBid;
+		return 0;
+		
 	}
 
 }

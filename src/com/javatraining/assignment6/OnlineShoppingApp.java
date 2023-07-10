@@ -69,8 +69,9 @@ public class OnlineShoppingApp {
 			System.out.println("No products available.");
 		} else {
 			for (Product product : products) {
-				System.out.println("Name: " + product.getName() + "     Description: " + product.getDescription()
-						+ "     Price: " + product.getPrice() + "    Available Quantioty" + product.getQuantity());
+//				System.out.println("Name: " + product.getName() + "     Description: " + product.getDescription()
+//						+ "     Price: " + product.getPrice() + "    Available Quantioty" + product.getQuantity());
+				System.out.println(product);
 			}
 		}
 	}

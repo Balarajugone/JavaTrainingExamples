@@ -35,9 +35,8 @@ public class OnlineBiddingSystem {
 			case 2:
 				User user = userManagementService.login();
 				if (user != null) {
+					System.out.println("Welcome Mr/Mrs " + user.getUsername());
 					mainMenue(user);
-				} else {
-					System.out.println("No user has been Registered, Please Register the user first");
 				}
 				break;
 			case 3:
@@ -86,33 +85,45 @@ public class OnlineBiddingSystem {
 
 							System.out.print("Enter the Bid Amount: ");
 							double bidAmount = sc.nextDouble();
-							Bid bid = new Bid(item.getName(), item.getDescription(), bidAmount);
-							user.addBid(bid);
+							// Bid bid = new Bid(item.getName(), item.getDescription(), bidAmount);
 							int Choose = 0;
 
-							System.out.println("\n1. Incremental Bidding");
-							System.out.println("2. Automatic Bidding");
-							System.out.println("Choose a bidding strategy: ");
+							System.out.println(
+									"1. Incremental Bidding \n 2. Automatic Bidding \n Choose a bidding strategy: ");
 							Choose = sc.nextInt();
-
+							double bids;
+							Bid bid;
+							BiddingStrategy biddingStrategy;
 							switch (Choose) {
 							case 1:
-								IncrementalBiddingStrategy incrementalBiddingStrategy = new IncrementalBiddingStrategy();
-								System.out.println(incrementalBiddingStrategy.bid(item, user, bidAmount));
-
+								biddingStrategy = new IncrementalBiddingStrategy();
+								bids = biddingStrategy.bid(item, user, bidAmount);
+								if (bids != 0) {
+									bid = new Bid(item.getName(), item.getDescription(), bidAmount);
+									user.addBid(bid);
+								}
+								System.out.println(bidAmount);
 								break;
 							case 2:
-								AutomaticBiddingStrategy automaticBiddingStrategy = new AutomaticBiddingStrategy();
-								System.out.println(automaticBiddingStrategy.bid(item, user, bidAmount));
+								biddingStrategy = new AutomaticBiddingStrategy();
+								bids = biddingStrategy.bid(item, user, bidAmount);
+								bidAmount = bids;
+								bid = new Bid(item.getName(), item.getDescription(), bidAmount);
+								user.addBid(bid);
+								System.out.println(bids);
 								break;
 							}
 						}
 					}
 					break;
 				case 2:
-					for (Bid bidhist : user.getBiddingHistory())
-						System.out.println(bidhist.getItemName() + " - " + bidhist.getDescription() + " - "
-								+ bidhist.getBidAmount() + " - " + bidhist.isWinbid());
+					if (user.getBiddingHistory().isEmpty()) {
+						System.out.println("There are No successfull bids yet...");
+					} else {
+						for (Bid bidhist : user.getBiddingHistory())
+							System.out.println(bidhist.getItemName() + " - " + bidhist.getDescription() + " - "
+									+ bidhist.getBidAmount() + " - " + bidhist.isWinbid());
+					}
 					break;
 				case 3:
 					option = false;

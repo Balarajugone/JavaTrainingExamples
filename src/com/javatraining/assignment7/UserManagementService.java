@@ -78,12 +78,17 @@ public class UserManagementService {
 	 * @return Return the user if authentication get success
 	 */
 	public User authenticateUser(String username, String password) {
+		if(users.isEmpty()) {
+			System.out.println("The user is not Registered, Please Register the user first");
+		}else {
 		for (User user : users) {
 			if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
 				return user;
 			} else {
 				System.out.println("UserName or Password is incorrect...");
+				break;
 			}
+		}
 		}
 		return null;
 
